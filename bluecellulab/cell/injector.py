@@ -282,6 +282,10 @@ class InjectableMixin:
         clamp = bluecellulab.neuron.h.SEClamp(segx, sec=section)
         clamp.dur1 = tvec[-1]
         clamp.amp1 = reversal
+        
+        clampCurrent = bluecellulab.neuron.h.Vector()
+        clampCurrent.record(clamp._ref_i)
+        
         # support delay with initial zero
         tvec.insrt(0, 0)
         svec.insrt(0, 0)
@@ -294,6 +298,7 @@ class InjectableMixin:
         self.persistent.append(clamp)
         self.persistent.append(tvec)
         self.persistent.append(svec)
+        self.persistent.append(clampCurrent)
         return tvec, svec
 
     def add_replay_shotnoise(
