@@ -293,7 +293,7 @@ class InjectableMixin:
         # rs is in MOhm, so conductance is in uS (micro Siemens)
         svec = bluecellulab.neuron.h.Vector(
             [1 / x if x > 1E-9 and x < 1E9 else 1E9 for x in svec])
-        svec.play(clamp._ref_rs, tvec, 1)
+        svec.play(clamp._ref_rs, tvec, 0)
 
         self.persistent.append(clamp)
         self.persistent.append(tvec)
